@@ -1,13 +1,7 @@
-import React from "react";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
-      <header className="w-full py-6 bg-indigo-600 text-white text-center">
-        <h1 className="text-4xl font-extrabold">Gift Mate</h1>
-        <p className="mt-2 text-lg">Manage your event gifts seamlessly</p>
-      </header>
-
+    <div className="bg-gray-50 flex flex-col py-24 items-center justify-center">
       <section className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
@@ -63,6 +57,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      {/* <Footer /> */}
     </div>
   );
 };

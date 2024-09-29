@@ -1,0 +1,48 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+
+    #root {
+        height: 100vh;
+    }
+}
+
+@layer utilities {
+    .scrollbar::-webkit-scrollbar {
+        @apply w-2 h-2;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        @apply rounded-full bg-gray-200;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        @apply rounded-full bg-blue-400;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        @apply bg-blue-800;
+    }
+
+    .owner-card:hover .inner-card {
+        @apply border-blue-600;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+}

@@ -6,8 +6,9 @@ import Layout from "./components/Layout";
 import Spinner from "./components/Spinner";
 import MovieDetailPage from "./components/pages/MovieDetailPage";
 import MovieList from "./components/pages/MovieList";
-import { AuthRoutes, LayoutRoutes } from "./routes/layoutRoutes";
+import { AuthRoutes, DashboardRoutes } from "./routes/dashboardRoutes";
 import UnAthenticatedRouteHO from "./HOC/UnAthenticatedRouteHOC";
+import EventDetailPage from "./components/pages/EventDetailPage";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           {/* Layout route wraps around other routes */}
           <Route path="/" element={<Layout />}>
             {/* Map over LayoutRoutes and render the element for each */}
-            {LayoutRoutes.map((route) => (
+            {DashboardRoutes.map((route) => (
               <Route
                 path={route.key}
                 key={route.key}
@@ -37,6 +38,7 @@ function App() {
           ))}
           <Route path="/profile" element={<MovieList cardData={undefined} />} />
           <Route path={`/movie-detail/:id`} element={<MovieDetailPage />} />
+          <Route path="/event/:eventId" element={<EventDetailPage />} />
           <Route path="*" element={<div>404</div>} />
         </Routes>
       </Suspense>
