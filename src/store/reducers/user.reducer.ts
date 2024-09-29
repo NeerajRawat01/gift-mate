@@ -13,7 +13,6 @@ const initialState = {
   error: "",
   errors: [],
   update: { loading: false },
-  advisorSubscriptionData: {},
 };
 export const userSlice = createSlice({
   name: "user",

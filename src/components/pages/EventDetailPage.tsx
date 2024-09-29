@@ -93,7 +93,7 @@ const EventDetailPage: React.FC = () => {
 
   const pieData = data.map((contributor) => ({
     name: contributor.name,
-    value: (contributor.amount / totalAmount) * 100, // Percentage of total contributions
+    value: Math.round((contributor.amount / totalAmount) * 100), // Percentage of total contributions (fixed to 0 decimal places)
   }));
 
   return (

@@ -1,22 +1,20 @@
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { MdOutlinePushPin } from "react-icons/md";
+import { Event } from "../../models/event";
+import { format } from "date-fns";
 
 interface Props {
-  event: {
-    id: number;
-    name: string;
-    date: string;
-    venue: string;
-    description: string;
-    imageUrl: string;
-  };
+  event: Event;
+  onInviteClick?: (eventId: number) => void;
   forMyEvents?: boolean;
 }
 
-const EventCard: React.FC<Props> = ({ event, forMyEvents }) => {
+const EventCard: React.FC<Props> = ({ event, forMyEvents, onInviteClick }) => {
+  const dateStr = event.date;
+  const formattedDate = format(new Date(dateStr), "do MMMM yyyy");
   return (
-    <div className="max-w-md mx-auto bg-white shadow-xl rounded-xl p-6 mb-4 hover:shadow-2xl transition-shadow duration-300">
-      <div className="flex flex-col h-full justify-between">
+    <div className="w-full bg-white shadow-xl rounded-xl mb-4 hover:shadow-2xl transition-shadow duration-300">
+      <div className="flex flex-col h-full p-4 justify-between">
         <div>
           {/* Event Image */}
           <img
@@ -34,7 +32,7 @@ const EventCard: React.FC<Props> = ({ event, forMyEvents }) => {
           <div className="mt-2 text-gray-600 flex items-center space-x-4">
             <div className="flex items-center space-x-1">
               <FaRegCalendarAlt className="h-5 w-5 text-indigo-600" />
-              <span>{event.date}</span>
+              <span>{formattedDate}</span>
             </div>
             <div className="flex items-center space-x-1">
               <MdOutlinePushPin className="h-5 w-5 text-indigo-600" />
@@ -43,13 +41,16 @@ const EventCard: React.FC<Props> = ({ event, forMyEvents }) => {
           </div>
 
           {/* Event Description */}
-          <p className="mt-4 text-gray-600">{event.description}</p>
+          <p className="mt-4  text-gray-600 break-all">{event.description}</p>
         </div>
 
         {/* Delete and Invite Contributor Buttons (Side by Side) */}
         {forMyEvents && (
           <div className="mt-6 flex gap-4">
-            <button className="flex-1 bg-cyan-600 text-white py-2 px-4 rounded-lg hover:bg-cyan-700 transition-colors duration-300">
+            <button
+              onClick={() => onInviteClick?.(event.id)}
+              className="flex-1 bg-cyan-600 text-white py-2 px-4 rounded-lg hover:bg-cyan-700 transition-colors duration-300"
+            >
               Invite Contributor
             </button>
             <button className="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors duration-300">

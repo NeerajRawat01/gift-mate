@@ -1,56 +1,73 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Movie } from "../../models/movie";
+import InviteContributerModal from "../../modal/InviteContributerModal";
+import { invitationActionType } from "../../store/actions/actions.constants";
+import {
+  allInvitations,
+  invitationLoading,
+} from "../../store/selectors/invitation.selector";
 import EventCard from "../cards/EventCard";
+import Spinner from "../Spinner";
 
-interface Props {
-  cardData?: Movie;
-}
-
-const Invitations: React.FC<Props> = ({ cardData }) => {
+const Invitations: React.FC = () => {
   const navigate = useNavigate();
-  const events = [
-    {
-      id: 1,
-      name: "Annual Charity Gala",
-      date: "12th December 2024",
-      venue: "Hilton Downtown",
-      description:
-        "Join us for an evening of entertainment, food, and fundraising.",
-      imageUrl: "https://via.placeholder.com/400x200.png?text=Event+Image",
-    },
-    {
-      id: 2,
-      name: "Tech Conference 2024",
-      date: "25th November 2024",
-      venue: "San Francisco Convention Center",
-      description:
-        "A conference to showcase the latest in technology and innovation.",
-      imageUrl: "https://via.placeholder.com/400x200.png?text=Event+Image",
-    },
-  ];
+  const dispatch = useDispatch();
 
-  const gifts = [
-    {
-      eventName: "Wedding Celebration",
-      date: "15th September 2024",
-      contributorName: "John Doe",
-      contributorEmail: "johndoe@example.com",
-      amount: 200,
-    },
-    {
-      eventName: "Baby Shower",
-      date: "10th October 2024",
-      contributorName: "Jane Smith",
-      contributorEmail: "janesmith@example.com",
-      amount: 150,
-    },
-  ];
+  useEffect(() => {
+    dispatch({
+      type: invitationActionType.FETCH_INVITATION,
+    });
+  }, []);
+
+  const [showInviteModal, setShowInviteModal] = useState(false);
+  const [eventId, setEventId] = useState<number>();
+
+  const invitations = useSelector(allInvitations);
+  const loading = useSelector(invitationLoading);
+
+  console.log("eventsData", loading, invitations);
 
   return (
-    <div className="p-10 gap-8 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
-      {events.map((event, index) => (
-        <EventCard key={index} event={event} />
-      ))}
+    <div className="px-10 py-5">
+      {/* Title and Info */}
+      <div className="mb-4">
+        <h1 className="text-2xl font-bold">Invitations</h1>
+        <p className="text-gray-600">
+          These are your invitations. You can view details and manage your
+          contributions.
+        </p>
+      </div>
+
+      {/* Event Cards */}
+      <div className="gap-10 p-2 max-h-[calc(100vh-10rem)] scrollbar overflow-auto grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+        {loading ? (
+          <Spinner />
+        ) : (
+          invitations.map((invitation) => (
+            <EventCard
+              onInviteClick={(event_id) => {
+                setEventId(event_id);
+                setShowInviteModal(true);
+              }}
+              key={invitation.id}
+              event={invitation.event}
+            />
+          ))
+        )}
+      </div>
+      {invitations.length === 0 && (
+        <div className="text-center w-full text-indigo-600 text-3xl mt-5">
+          <p>No Invitation found</p>
+        </div>
+      )}
+
+      {/* Invite Contributer Modal */}
+      <InviteContributerModal
+        event_id={eventId!}
+        visible={showInviteModal}
+        handleVisibility={setShowInviteModal}
+      />
     </div>
   );
 };

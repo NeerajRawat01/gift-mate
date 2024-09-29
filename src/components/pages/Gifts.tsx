@@ -1,12 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { Movie } from "../../models/movie";
+
 import Giftcard from "../cards/Giftcard";
 
-interface Props {
-  cardData?: Movie;
-}
-
-const Gifts: React.FC<Props> = ({ cardData }) => {
+const Gifts: React.FC = () => {
   const navigate = useNavigate();
 
   const gifts = [

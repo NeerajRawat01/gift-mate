@@ -11,6 +11,7 @@ import { userAdd } from "../reducers/user.reducer";
 
 function* loginSaga(data: any): any {
   const userData = data.payload;
+  const callback = data.callback;
   try {
     const response = yield call(authService.loginUser, userData);
 
@@ -18,6 +19,9 @@ function* loginSaga(data: any): any {
     yield put(loginCompletedAction({ id: response?.user?.id }));
     yield put(userAdd(response.user));
     localStorageService.setAuthToken(response?.token);
+    if (callback) {
+      callback();
+    }
   } catch (e: any) {
     yield put(
       loginErrorAction(

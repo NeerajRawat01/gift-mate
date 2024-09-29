@@ -6,11 +6,13 @@ import {
   authActionType,
   userActionType,
 } from "../../store/actions/actions.constants";
+import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
   // State to toggle between Sign In and Sign Up
   const [isSignUp, setIsSignUp] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Validation schema for Sign In
   const signInSchema = Yup.object().shape({
@@ -34,6 +36,10 @@ const AuthPage = () => {
       .oneOf([Yup.ref("password"), undefined], "Passwords must match") // Replace null with undefined
       .required("Confirm password is required"),
   });
+
+  const afterLogin = () => {
+    navigate("/");
+  };
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-100">
@@ -64,7 +70,7 @@ const AuthPage = () => {
             } else {
               dispatch({
                 type: authActionType.LOGIN_USER,
-                payload: values,
+                payload: { ...values, afterLogin },
               });
               console.log("Sign In Form Values:", values);
             }

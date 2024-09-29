@@ -2,29 +2,32 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { eventActionType } from "../store/actions/actions.constants";
+import { invitationActionType } from "../store/actions/actions.constants";
 import Modal from "./Modal";
 
 interface Props {
+  event_id: number;
   visible: boolean;
   handleVisibility: (value: boolean) => void | undefined;
 }
 
-const CreateEventModal: React.FC<Props> = ({ handleVisibility, visible }) => {
+const InviteContributerModal: React.FC<Props> = ({
+  handleVisibility,
+  visible,
+  event_id,
+}) => {
   // Initial form values
   const initialValues = {
-    name: "",
-    date: "",
-    venue: "",
-    description: "",
+    email: "",
+    message: "",
   };
 
   // Form validation schema
   const validationSchema = Yup.object({
-    name: Yup.string().required("Event name is required"),
-    date: Yup.date().required("Event date is required").nullable(),
-    venue: Yup.string().required("Event venue is required"),
-    description: Yup.string().required("Event description is required"),
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    message: Yup.string().required("Message is required"),
   });
 
   const dispatch = useDispatch();
@@ -32,15 +35,15 @@ const CreateEventModal: React.FC<Props> = ({ handleVisibility, visible }) => {
   // Form submission handler
   const handleSubmit = (values: any) => {
     dispatch({
-      type: eventActionType.CREATE_EVENT,
-      payload: values,
+      type: invitationActionType.SEND_INVITE,
+      payload: { ...values, eventId: event_id },
     });
     handleVisibility(false);
   };
 
   return (
     <Modal
-      title="Create New Event"
+      title="Invite Contributor"
       visible={visible}
       onClose={() => handleVisibility(false)}
     >
@@ -52,71 +55,35 @@ const CreateEventModal: React.FC<Props> = ({ handleVisibility, visible }) => {
         >
           {({ isSubmitting }) => (
             <Form>
-              {/* Event Name */}
-              <div className="mx-auto rounded-lg p-5 w-[40rem] h-[30rem] scrollbar overflow-auto">
+              <div className="mx-auto rounded-lg p-6 w-[25rem] h-[20rem] scrollbar overflow-auto">
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold mb-2">
-                    Event Name
+                    Contributor Email
                   </label>
                   <Field
-                    name="name"
+                    name="email"
                     type="text"
                     className="w-full p-2 border border-gray-300 rounded-lg"
                   />
                   <ErrorMessage
-                    name="name"
+                    name="email"
                     component="div"
                     className="text-red-600 mt-1"
                   />
                 </div>
 
-                {/* Event Date */}
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold mb-2">
-                    Event Date
+                    Message for Contributor
                   </label>
                   <Field
-                    name="date"
-                    type="date"
-                    className="w-full p-2 border border-gray-300 rounded-lg"
-                  />
-                  <ErrorMessage
-                    name="date"
-                    component="div"
-                    className="text-red-600 mt-1"
-                  />
-                </div>
-
-                {/* Event Venue */}
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">
-                    Event Venue
-                  </label>
-                  <Field
-                    name="venue"
-                    type="text"
-                    className="w-full p-2 border border-gray-300 rounded-lg"
-                  />
-                  <ErrorMessage
-                    name="venue"
-                    component="div"
-                    className="text-red-600 mt-1"
-                  />
-                </div>
-
-                {/* Event Description */}
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">
-                    Event Description
-                  </label>
-                  <Field
-                    name="description"
+                    name="message"
                     as="textarea"
                     rows="3"
                     className="w-full p-2 border border-gray-300 rounded-lg"
                   />
                   <ErrorMessage
-                    name="description"
+                    name="message"
                     component="div"
                     className="text-red-600 mt-1"
                   />
@@ -141,4 +108,4 @@ const CreateEventModal: React.FC<Props> = ({ handleVisibility, visible }) => {
   );
 };
 
-export default CreateEventModal;
+export default InviteContributerModal;

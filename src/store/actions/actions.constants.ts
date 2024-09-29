@@ -10,3 +10,13 @@ export enum userActionType {
 export enum authActionType {
   LOGIN_USER = "user/login",
 }
+
+export enum eventActionType {
+  CREATE_EVENT = "event/create",
+  FETCH_EVENTS = "event/fetch",
+}
+
+export enum invitationActionType {
+  SEND_INVITE = "invite/send",
+  FETCH_INVITATION = "invitation/fetch",
+}
