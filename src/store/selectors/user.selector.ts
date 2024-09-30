@@ -15,9 +15,4 @@ export const getUserLoading = createSelector(
   (user) => user.loading
 );
 
-export const getUserUpdateProfileLoading = createSelector(
-  [userStore],
-  (user) => user.update?.loading
-);
-
 export const userErrors = createSelector([userStore], (user) => user.errors);

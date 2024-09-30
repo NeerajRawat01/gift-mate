@@ -1,16 +1,15 @@
-import { all, call, takeLatest } from "redux-saga/effects";
+import { all, call, put, takeLatest } from "redux-saga/effects";
 import { userService } from "../../services/apiServices/userSrvice";
 import { userActionType } from "../actions/actions.constants";
+import { userAdd, userError } from "../reducers/user.reducer";
 
 function* createUserSaga(action: any): any {
   const userData = action.payload;
   try {
-    // yield put(fetchMovies());
     const data = yield call(userService.createUser, userData);
-    console.log("user", data);
-    // yield put(fetchMoviesCompleted({ movies: data }));
+    yield put(userAdd(data.data));
   } catch (e: any) {
-    // yield put(fetchMoviesError(e.message));
+    yield put(userError(e.message));
   }
 }
 

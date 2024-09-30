@@ -8,6 +8,8 @@ import Spinner from "./components/Spinner";
 import EventDetailPage from "./components/pages/EventDetailPage";
 import MovieList from "./components/pages/MovieList";
 import { AuthRoutes, DashboardRoutes } from "./routes/dashboardRoutes";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -36,10 +38,10 @@ function App() {
             />
           ))}
           <Route path="/profile" element={<MovieList cardData={undefined} />} />
-          {/* <Route path={`/movie-detail/:id`} element={<MovieDetailPage />} /> */}
           <Route path="/event/:eventId" element={<EventDetailPage />} />
           <Route path="*" element={<div>404</div>} />
         </Routes>
+        <ToastContainer position="top-right" autoClose={2000} />
       </Suspense>
     </BrowserRouter>
   );

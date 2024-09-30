@@ -8,21 +8,21 @@ import {
   loginLoading,
 } from "../reducers/auth.reducer";
 import { userAdd } from "../reducers/user.reducer";
+import { toast } from "react-toastify";
 
 function* loginSaga(data: any): any {
   const userData = data.payload;
-  const callback = data.callback;
   try {
     const response = yield call(authService.loginUser, userData);
-
-    console.log("login", response);
     yield put(loginCompletedAction({ id: response?.user?.id }));
     yield put(userAdd(response.user));
     localStorageService.setAuthToken(response?.token);
-    if (callback) {
-      callback();
+    if (userData.callback) {
+      userData.callback();
     }
+    toast.success("Login successfully");
   } catch (e: any) {
+    toast.error(e.message);
     yield put(
       loginErrorAction(
         (e?.errors && e.errors[0]?.message) || e?.response?.data?.message
@@ -31,7 +31,20 @@ function* loginSaga(data: any): any {
     yield put(loginLoading({ loading: false }));
   }
 }
+function* fetchMeSaga(): any {
+  try {
+    const response = yield call(authService.fetchMe);
+    yield put(userAdd(response.user));
+  } catch (e: any) {
+    localStorageService.removeAuthToken();
+    toast.error(e.message);
+    yield put(loginLoading({ loading: false }));
+  }
+}
 
 export function* authSagaWatcher() {
-  yield all([takeLatest(authActionType.LOGIN_USER, loginSaga)]);
+  yield all([
+    takeLatest(authActionType.LOGIN_USER, loginSaga),
+    takeLatest(authActionType.FETCH_ME, fetchMeSaga),
+  ]);
 }

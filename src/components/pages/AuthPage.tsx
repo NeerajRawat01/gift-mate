@@ -70,7 +70,7 @@ const AuthPage = () => {
             } else {
               dispatch({
                 type: authActionType.LOGIN_USER,
-                payload: { ...values, afterLogin },
+                payload: { ...values, callback: afterLogin },
               });
               console.log("Sign In Form Values:", values);
             }

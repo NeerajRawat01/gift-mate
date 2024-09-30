@@ -7,6 +7,7 @@ import {
   eventError,
   eventLoading,
 } from "../reducers/event.reducer";
+import { toast } from "react-toastify";
 
 function* createEventSaga(action: any): any {
   const eventData = action.payload;
@@ -15,7 +16,10 @@ function* createEventSaga(action: any): any {
     const response = yield call(eventService.createEvent, eventData);
     yield put(eventAdd(response.data));
     yield put(eventLoading({ loading: false }));
+    toast.success("Event created successfully");
   } catch (e: any) {
+     yield put(eventLoading({ loading: false }));
+    toast.error(e.message);
     yield put(eventError(e.message));
   }
 }
@@ -27,6 +31,7 @@ function* fetchEventsSaga(): any {
     yield put(addMayEvents(response.data));
     yield put(eventLoading({ loading: false }));
   } catch (e: any) {
+     yield put(eventLoading({ loading: false }));
     yield put(eventError(e.message));
   }
 }

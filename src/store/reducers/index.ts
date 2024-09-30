@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import authReducer from "./auth.reducer";
 import eventReducer from "./event.reducer";
-import userReducer from "./user.reducer";
 import invitationReducer from "./invitation.reducer";
+import userReducer from "./user.reducer";
 
 const appReducer = combineReducers({
   auth: authReducer,

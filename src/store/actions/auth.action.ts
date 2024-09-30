@@ -10,3 +10,7 @@ export const loginUserAction = (payload: AuthLoginActionPayloadType) => ({
   type: authActionType.LOGIN_USER,
   payload,
 });
+
+export const fetchMeAction = () => ({
+  type: authActionType.FETCH_ME,
+});

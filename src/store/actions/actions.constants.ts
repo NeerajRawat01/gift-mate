@@ -9,6 +9,7 @@ export enum userActionType {
 
 export enum authActionType {
   LOGIN_USER = "user/login",
+  FETCH_ME = "user/fetch-me",
 }
 
 export enum eventActionType {
