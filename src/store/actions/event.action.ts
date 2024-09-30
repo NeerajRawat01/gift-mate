@@ -1,11 +1,16 @@
 import { Event } from "../../models/event";
-import { eventActionType } from "./actions.constants";
+import { EventActionType } from "./actions.constants";
 
 export const createEventAction = (payload: Event) => ({
-  type: eventActionType.CREATE_EVENT,
+  type: EventActionType.CREATE_EVENT,
   payload,
 });
 
 export const fetchEventsAction = () => ({
-  type: eventActionType.FETCH_EVENTS,
+  type: EventActionType.FETCH_EVENTS,
+});
+
+export const fetchEventById = (payload: number) => ({
+  type: EventActionType.CREATE_EVENT,
+  payload,
 });

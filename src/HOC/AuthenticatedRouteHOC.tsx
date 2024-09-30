@@ -23,11 +23,11 @@ const AuthenticatedRouteHOC = <P extends object>(
       }
     }, [token, userData?.id, dispatch]);
 
-    if (userData?.id) {
+    if (token) {
       return <Component {...(props as P)} />;
+    } else {
+      return <Navigate to={`/auth`} />;
     }
-
-    return <Navigate to={`/auth`} />;
   };
 
   return AuthenticatedRoute;

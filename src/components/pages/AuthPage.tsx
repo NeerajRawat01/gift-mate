@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import {
-  authActionType,
-  userActionType,
+  AuthActionType,
+  UserActionType,
 } from "../../store/actions/actions.constants";
 import { useNavigate } from "react-router-dom";
 
@@ -63,13 +63,13 @@ const AuthPage = () => {
             // Handle sign-in or sign-up logic here
             if (isSignUp) {
               dispatch({
-                type: userActionType.CREATE_USER,
+                type: UserActionType.CREATE_USER,
                 payload: values,
               });
               console.log("Sign Up Form Values:", values);
             } else {
               dispatch({
-                type: authActionType.LOGIN_USER,
+                type: AuthActionType.LOGIN_USER,
                 payload: { ...values, callback: afterLogin },
               });
               console.log("Sign In Form Values:", values);

@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { eventActionType } from "../store/actions/actions.constants";
+import { EventActionType } from "../store/actions/actions.constants";
 import Modal from "./Modal";
 
 interface Props {
@@ -32,7 +32,7 @@ const CreateEventModal: React.FC<Props> = ({ handleVisibility, visible }) => {
   // Form submission handler
   const handleSubmit = (values: any) => {
     dispatch({
-      type: eventActionType.CREATE_EVENT,
+      type: EventActionType.CREATE_EVENT,
       payload: values,
     });
     handleVisibility(false);
@@ -53,7 +53,7 @@ const CreateEventModal: React.FC<Props> = ({ handleVisibility, visible }) => {
           {({ isSubmitting }) => (
             <Form>
               {/* Event Name */}
-              <div className="mx-auto rounded-lg p-5 w-[40rem] h-[30rem] scrollbar overflow-auto">
+              <div className="mx-auto rounded-lg p-5 md:w-[40rem] md:h-[30rem] scrollbar overflow-auto">
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold mb-2">
                     Event Name

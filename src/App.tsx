@@ -1,15 +1,14 @@
 import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import AuthenticatedRouteHOC from "./HOC/AuthenticatedRouteHOC";
 import UnAthenticatedRouteHO from "./HOC/UnAthenticatedRouteHOC";
 import Layout from "./components/Layout";
 import Spinner from "./components/Spinner";
 import EventDetailPage from "./components/pages/EventDetailPage";
-import MovieList from "./components/pages/MovieList";
 import { AuthRoutes, DashboardRoutes } from "./routes/dashboardRoutes";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -37,7 +36,6 @@ function App() {
               Component={route.element && UnAthenticatedRouteHO(route.element)}
             />
           ))}
-          <Route path="/profile" element={<MovieList cardData={undefined} />} />
           <Route path="/event/:eventId" element={<EventDetailPage />} />
           <Route path="*" element={<div>404</div>} />
         </Routes>

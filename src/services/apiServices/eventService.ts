@@ -26,6 +26,15 @@ class EventService {
     });
     return response.data;
   }
+
+  public async fetchEventsById(event_id: number) {
+    const response = await axios.get(`${apiUrl}/event/${event_id}`, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+    return response.data;
+  }
 }
 
 export const eventService = EventService.getInstance();

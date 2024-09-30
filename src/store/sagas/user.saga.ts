@@ -1,18 +1,20 @@
+import { toast } from "react-toastify";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { userService } from "../../services/apiServices/userSrvice";
-import { userActionType } from "../actions/actions.constants";
-import { userAdd, userError } from "../reducers/user.reducer";
+import { UserActionType } from "../actions/actions.constants";
+import { userError } from "../reducers/user.reducer";
 
 function* createUserSaga(action: any): any {
   const userData = action.payload;
   try {
-    const data = yield call(userService.createUser, userData);
-    yield put(userAdd(data.data));
+    yield call(userService.createUser, userData);
+    toast.success("User created successfully");
   } catch (e: any) {
+    toast.error(e.message);
     yield put(userError(e.message));
   }
 }
 
 export function* userSagaWatcher() {
-  yield all([takeLatest(userActionType.CREATE_USER, createUserSaga)]);
+  yield all([takeLatest(UserActionType.CREATE_USER, createUserSaga)]);
 }

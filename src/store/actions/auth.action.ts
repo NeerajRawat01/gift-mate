@@ -1,4 +1,4 @@
-import { authActionType } from "./actions.constants";
+import { AuthActionType } from "./actions.constants";
 
 export interface AuthLoginActionPayloadType {
   password: string;
@@ -7,10 +7,10 @@ export interface AuthLoginActionPayloadType {
 }
 
 export const loginUserAction = (payload: AuthLoginActionPayloadType) => ({
-  type: authActionType.LOGIN_USER,
+  type: AuthActionType.LOGIN_USER,
   payload,
 });
 
 export const fetchMeAction = () => ({
-  type: authActionType.FETCH_ME,
+  type: AuthActionType.FETCH_ME,
 });

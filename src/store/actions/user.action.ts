@@ -1,4 +1,4 @@
-import { userActionType } from "./actions.constants";
+import { UserActionType } from "./actions.constants";
 
 export interface createUser {
   name: string;
@@ -7,6 +7,6 @@ export interface createUser {
 }
 
 export const createUserAction = (payload: createUser) => ({
-  type: userActionType.CREATE_USER,
+  type: UserActionType.CREATE_USER,
   payload,
 });

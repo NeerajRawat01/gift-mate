@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { FaGift } from "react-icons/fa";
-import { FcInvite, FcBusinessman } from "react-icons/fc";
+import { FcInvite } from "react-icons/fc";
+import { HiOutlineUserCircle } from "react-icons/hi";
 import { IoMdHome } from "react-icons/io";
 import { MdEventAvailable } from "react-icons/md";
 import { RiMenuUnfold3Fill, RiMenuUnfold4Fill } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getUserData } from "../store/selectors/user.selector";
-import { HiOutlineUserCircle } from "react-icons/hi";
+import { toast } from "react-toastify";
 import ConfirmModal from "../modal/ConfirmModal";
 import { localStorageService } from "../services/localStorageServices";
-import { toast } from "react-toastify";
+import { getUserData } from "../store/selectors/user.selector";
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false); // Start with the sidebar closed on mobile
@@ -43,6 +43,7 @@ const Sidebar: React.FC = () => {
     setShowLogoutModal(false);
     navigate("/auth");
     toast.success("Logged out successfully");
+    window.location.reload();
   };
 
   return (
@@ -106,7 +107,7 @@ const Sidebar: React.FC = () => {
             </div>
             <button
               onClick={() => setShowLogoutModal(true)}
-              className="w-full py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700"
+              className="w-full py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-700"
             >
               Logout
             </button>

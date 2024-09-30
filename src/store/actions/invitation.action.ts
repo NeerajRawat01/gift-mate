@@ -1,14 +1,14 @@
-import { invitationActionType } from "./actions.constants";
+import { InvitationActionType } from "./actions.constants";
 
 export const sendInviteAction = (payload: {
   email: string;
   message: string;
   eventId: number;
 }) => ({
-  type: invitationActionType.SEND_INVITE,
+  type: InvitationActionType.SEND_INVITE,
   payload,
 });
 
 export const fetchInvitationAction = () => ({
-  type: invitationActionType.FETCH_INVITATION,
+  type: InvitationActionType.FETCH_INVITATION,
 });

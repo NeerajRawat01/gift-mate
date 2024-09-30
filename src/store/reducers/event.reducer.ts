@@ -9,6 +9,7 @@ const userAdapter = createEntityAdapter<Event>();
 
 const initialState = {
   ...userAdapter.getInitialState(),
+  detailedEvent: {},
   loading: false,
   error: "",
   errors: [],
@@ -25,6 +26,9 @@ export const eventSlice = createSlice({
     eventLoading: (state, action: PayloadAction<{ loading: boolean }>) => {
       state.loading = action.payload.loading;
     },
+    addDetailedEvent: (state, action: PayloadAction<any>) => {
+      state.detailedEvent = action.payload;
+    },
     eventError: (
       state,
       action: PayloadAction<{ message: string; errors?: any }>
@@ -35,7 +39,13 @@ export const eventSlice = createSlice({
   },
 });
 
-export const { eventAdd, eventUpdate, eventLoading, eventError, addMayEvents } =
-  eventSlice.actions;
+export const {
+  eventAdd,
+  eventUpdate,
+  eventLoading,
+  eventError,
+  addMayEvents,
+  addDetailedEvent,
+} = eventSlice.actions;
 
 export default eventSlice.reducer;

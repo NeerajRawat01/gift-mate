@@ -1,17 +1,28 @@
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { MdOutlinePushPin } from "react-icons/md";
 import { Event } from "../../models/event";
-import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   event: Event;
   onInviteClick?: (eventId: number) => void;
+  onCotributeClick?: (eventId: number) => void;
   forMyEvents?: boolean;
 }
 
-const EventCard: React.FC<Props> = ({ event, forMyEvents, onInviteClick }) => {
-  const dateStr = event.date;
-  const formattedDate = format(new Date(dateStr), "do MMMM yyyy");
+const EventCard: React.FC<Props> = ({
+  event,
+  forMyEvents,
+  onInviteClick,
+  onCotributeClick,
+}) => {
+  const navigate = useNavigate();
+  const dateStr = event?.date;
+  const formattedDate = new Date(dateStr).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
   return (
     <div className="w-full bg-white shadow-xl rounded-xl mb-4 hover:shadow-2xl transition-shadow duration-300">
       <div className="flex flex-col h-full p-4 justify-between">
@@ -45,31 +56,34 @@ const EventCard: React.FC<Props> = ({ event, forMyEvents, onInviteClick }) => {
         </div>
 
         {/* Delete and Invite Contributor Buttons (Side by Side) */}
-        {forMyEvents && (
+        {/* {forMyEvents && (
           <div className="mt-6 flex gap-4">
-            <button
-              onClick={() => onInviteClick?.(event.id)}
-              className="flex-1 bg-cyan-600 text-white py-2 px-4 rounded-lg hover:bg-cyan-700 transition-colors duration-300"
-            >
-              Invite Contributor
-            </button>
             <button className="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors duration-300">
               Delete
             </button>
           </div>
-        )}
+        )} */}
 
         <div className="mt-4 flex gap-4">
           <button
-            className={`${
-              forMyEvents ? "w-full" : "flex-1"
-            }  bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors duration-300`}
+            onClick={() => navigate(`/event/${event.id}`)}
+            className={`flex-1 bg-indigo-600 text-white py-2 px-2 rounded-lg hover:bg-indigo-700 transition-colors duration-300`}
           >
             View Details
           </button>
-          {!forMyEvents && (
-            <button className="flex-1 bg-gray-100 text-indigo-600 py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors duration-300">
+          {!forMyEvents ? (
+            <button
+              onClick={() => onCotributeClick?.(event.id)}
+              className="flex-1 bg-gray-100 text-indigo-600 py-2 px-2 rounded-lg hover:bg-gray-200 transition-colors duration-300"
+            >
               Contribute
+            </button>
+          ) : (
+            <button
+              onClick={() => onInviteClick?.(event.id)}
+              className="flex-1 bg-gray-100 text-indigo-600 py-2 px-2 rounded-lg hover:bg-gray-200 transition-colors duration-300"
+            >
+              Invite Contributor
             </button>
           )}
         </div>

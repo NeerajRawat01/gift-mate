@@ -15,7 +15,7 @@ interface GiftHistoryCardProps {
 
 const Giftcard: React.FC<GiftHistoryCardProps> = ({ gift }) => {
   return (
-    <div className="mx-auto border bg-white shadow-lg rounded-xl p-6  hover:shadow-xl transition-shadow duration-300">
+    <div className="w-full border bg-white shadow-lg rounded-xl p-6  hover:shadow-xl transition-shadow duration-300">
       <div className="flex items-center">
         {/* Gift Icon */}
         <FaGift className="h-10 w-10 text-indigo-600 mr-4" />

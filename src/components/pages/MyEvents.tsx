@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import CreateEventModal from "../../modal/CreateEventModal";
-import EventCard from "../cards/EventCard";
 import { useDispatch, useSelector } from "react-redux";
-import { eventActionType } from "../../store/actions/actions.constants";
-import { allEvents, eventsLoading } from "../../store/selectors/event.selector";
-import Spinner from "../Spinner";
+import CreateEventModal from "../../modal/CreateEventModal";
 import InviteContributerModal from "../../modal/InviteContributerModal";
+import { EventActionType } from "../../store/actions/actions.constants";
+import { allEvents, eventsLoading } from "../../store/selectors/event.selector";
+import EventCard from "../cards/EventCard";
+import Spinner from "../Spinner";
 
 const MyEvents: React.FC = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({
-      type: eventActionType.FETCH_EVENTS,
+      type: EventActionType.FETCH_EVENTS,
     });
   }, []);
 
@@ -25,58 +23,14 @@ const MyEvents: React.FC = () => {
   const eventsData = useSelector(allEvents);
   const loading = useSelector(eventsLoading);
 
-  console.log("eventsData", loading, eventsData);
-  const events = [
-    {
-      id: 1,
-      name: "Annual Charity Gala",
-      date: "12th December 2024",
-      venue: "Hilton Downtown",
-      description:
-        "Join us for an evening of entertainment, food, and fundraising.",
-      imageUrl: "https://via.placeholder.com/400x200.png?text=Event+Image",
-    },
-    {
-      id: 2,
-      name: "Tech Conference 2024",
-      date: "25th November 2024",
-      venue: "San Francisco Convention Center",
-      description:
-        "A conference to showcase the latest in technology and innovation.",
-      imageUrl: "https://via.placeholder.com/400x200.png?text=Event+Image",
-      contributorName: "Jane Smith",
-      contributorEmail: "janesmith@example.com",
-      amount: 150,
-    },
-    {
-      id: 3,
-      name: "Annual Charity Gala",
-      date: "12th December 2024",
-      venue: "Hilton Downtown",
-      description:
-        "Join us for an evening of entertainment, food, and fundraising.",
-      imageUrl: "https://via.placeholder.com/400x200.png?text=Event+Image",
-      contributer: {
-        contributorName: "Jane Smith",
-        contributorEmail: "janesmith@example.com",
-        amount: 150,
-      },
-    },
-    {
-      id: 4,
-      name: "Tech Conference 2024",
-      date: "25th November 2024",
-      venue: "San Francisco Convention Center",
-      description:
-        "A conference to showcase the latest in technology and innovation.",
-    },
-  ];
-
   return (
-    <div className="px-10 py-5">
+    <div className="px-16 py-5">
       {/* Title and Create Event Button */}
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">My Events</h1>
+        <h1 className="text-4xl font-bold text-center  text-indigo-600">
+          My Events
+        </h1>
+
         <button
           className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
           onClick={() => setShowCreateModal(true)}

@@ -19,6 +19,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     userAdd: userAdapter.addOne,
+    userDelete: userAdapter.removeOne,
     userUpdate: userAdapter.updateOne,
     userLoading: (state, action: PayloadAction<{ loading: boolean }>) => {
       state.loading = action.payload.loading;
@@ -33,7 +34,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { userAdd, userUpdate, userLoading, userError } =
+export const { userAdd, userUpdate, userLoading, userError, userDelete } =
   userSlice.actions;
 
 export default userSlice.reducer;

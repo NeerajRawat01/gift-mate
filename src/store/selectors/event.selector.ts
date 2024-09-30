@@ -17,3 +17,8 @@ export const eventsLoading = createSelector(
   [eventStore],
   (event) => event.loading
 );
+
+export const getDetailedEvent = createSelector(
+  [eventStore],
+  (event) => event.detailedEvent
+);

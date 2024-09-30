@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { invitationActionType } from "../store/actions/actions.constants";
+import { InvitationActionType } from "../store/actions/actions.constants";
 import Modal from "./Modal";
 
 interface Props {
@@ -35,7 +35,7 @@ const InviteContributerModal: React.FC<Props> = ({
   // Form submission handler
   const handleSubmit = (values: any) => {
     dispatch({
-      type: invitationActionType.SEND_INVITE,
+      type: InvitationActionType.SEND_INVITE,
       payload: { ...values, eventId: event_id },
     });
     handleVisibility(false);
@@ -55,7 +55,7 @@ const InviteContributerModal: React.FC<Props> = ({
         >
           {({ isSubmitting }) => (
             <Form>
-              <div className="mx-auto rounded-lg p-6 w-[25rem] h-[20rem] scrollbar overflow-auto">
+              <div className="mx-auto rounded-lg p-6 md:w-[25rem] md:h-[20rem] scrollbar overflow-auto">
                 <div className="mb-4">
                   <label className="block text-gray-700 font-bold mb-2">
                     Contributor Email

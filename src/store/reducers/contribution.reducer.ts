@@ -13,18 +13,21 @@ const initialState = {
   errors: [],
   update: { loading: false },
 };
-export const invitationSlice = createSlice({
-  name: "invitation",
+export const contributionSlice = createSlice({
+  name: "contribution",
   initialState,
   reducers: {
-    addMayInvitations: userAdapter.addMany,
-    invitationAdd: userAdapter.addOne,
-    invitationDelete: userAdapter.removeOne,
-    invitationUpdate: userAdapter.updateOne,
-    invitationLoading: (state, action: PayloadAction<{ loading: boolean }>) => {
+    addMayContributions: userAdapter.addMany,
+    contributionAdd: userAdapter.addOne,
+    contributionDelete: userAdapter.removeOne,
+    contributionUpdate: userAdapter.updateOne,
+    contributionLoading: (
+      state,
+      action: PayloadAction<{ loading: boolean }>
+    ) => {
       state.loading = action.payload.loading;
     },
-    invitationError: (
+    contributionError: (
       state,
       action: PayloadAction<{ message: string; errors?: any }>
     ) => {
@@ -35,11 +38,11 @@ export const invitationSlice = createSlice({
 });
 
 export const {
-  invitationAdd,
-  invitationUpdate,
-  invitationLoading,
-  invitationError,
-  addMayInvitations,
-} = invitationSlice.actions;
+  contributionAdd,
+  contributionUpdate,
+  contributionLoading,
+  contributionError,
+  addMayContributions,
+} = contributionSlice.actions;
 
-export default invitationSlice.reducer;
+export default contributionSlice.reducer;

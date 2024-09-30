@@ -1,8 +1,8 @@
+import { toast } from "react-toastify";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { invitationService } from "../../services/apiServices/invitationService";
 import {
-  eventActionType,
-  invitationActionType,
+  InvitationActionType
 } from "../actions/actions.constants";
 import {
   addMayInvitations,
@@ -10,7 +10,6 @@ import {
   invitationError,
   invitationLoading,
 } from "../reducers/invitation.reducer";
-import { toast } from "react-toastify";
 
 function* sendInviteSaga(action: any): any {
   const userDetails = action.payload;
@@ -34,15 +33,15 @@ function* fetchInvitationSaga(): any {
     yield put(addMayInvitations(response.data));
     yield put(invitationLoading({ loading: false }));
   } catch (e: any) {
-     yield put(invitationLoading({ loading: false }));
+    yield put(invitationLoading({ loading: false }));
     yield put(invitationError(e.message));
   }
 }
 
 export function* invitationSagaWatcher() {
   yield all([
-    takeLatest(invitationActionType.SEND_INVITE, sendInviteSaga),
-    invitationActionType.FETCH_INVITATION,
-    takeLatest(invitationActionType.FETCH_INVITATION, fetchInvitationSaga),
+    takeLatest(InvitationActionType.SEND_INVITE, sendInviteSaga),
+    InvitationActionType.FETCH_INVITATION,
+    takeLatest(InvitationActionType.FETCH_INVITATION, fetchInvitationSaga),
   ]);
 }
