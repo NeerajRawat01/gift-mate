@@ -36,7 +36,10 @@ function App() {
               Component={route.element && UnAthenticatedRouteHO(route.element)}
             />
           ))}
-          <Route path="/event/:eventId" element={<EventDetailPage />} />
+          <Route
+            path="/event/:eventId"
+            Component={AuthenticatedRouteHOC(EventDetailPage)}
+          />
           <Route path="*" element={<div>404</div>} />
         </Routes>
         <ToastContainer position="top-right" autoClose={2000} />
