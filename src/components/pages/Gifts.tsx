@@ -41,7 +41,7 @@ const Gifts: React.FC = () => {
   }, [gifts]);
 
   return (
-    <div className="px-16 py-5">
+    <div className="px-10 py-5">
       <h1 className="text-4xl font-bold  mb-4 text-indigo-600">
         My Received Gifts
       </h1>
@@ -49,7 +49,7 @@ const Gifts: React.FC = () => {
         Here you can find all the gifts you have received from various events.
         Each card displays the event details and the contributor's information.
       </p>
-      <div className="max-h-[calc(100vh-12rem)] overflow-auto scrollbar p-2 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
+      <div className="max-h-[calc(100vh-16rem)] overflow-auto scrollbar p-2 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
         {loading ? (
           <Spinner />
         ) : (

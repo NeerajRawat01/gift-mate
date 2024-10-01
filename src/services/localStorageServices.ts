@@ -1,4 +1,3 @@
-
 export const AUTH_TOKEN = "auth_token";
 
 export const PREV_LINK = "prev_link";

@@ -3,26 +3,25 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 import { authService } from "../../services/apiServices/authService";
 import { localStorageService } from "../../services/localStorageServices";
 import { AuthActionType } from "../actions/actions.constants";
-import {
-  loginCompletedAction,
-  loginErrorAction,
-  loginLoading,
-} from "../reducers/auth.reducer";
-import { userAdd } from "../reducers/user.reducer";
+import { loginErrorAction, loginLoading } from "../reducers/auth.reducer";
+import { userAdd, userLoading } from "../reducers/user.reducer";
 
 function* loginSaga(data: any): any {
   const userData = data.payload;
 
   try {
     const response = yield call(authService.loginUser, userData);
-    yield put(loginCompletedAction({ id: response?.user?.id }));
+    yield put(userLoading({ loading: true }));
     yield put(userAdd(response.user));
+    console.log("response", response?.token);
     localStorageService.setAuthToken(response?.token);
     if (userData.callback) {
       userData.callback();
     }
+    yield put(userLoading({ loading: false }));
     toast.success("Login successfully");
   } catch (e: any) {
+    yield put(userLoading({ loading: false }));
     toast.error(e.message);
     yield put(
       loginErrorAction(

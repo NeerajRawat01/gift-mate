@@ -143,20 +143,20 @@ const EventDetailPage: React.FC = () => {
       )}
 
       {/* Delete and Contribute Buttons */}
-      <div className="mt-8 flex justify-end gap-4">
+      {/* <div className="mt-8 flex justify-end gap-4">
         <button
           className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
-          //   onClick={handleDelete}
+            onClick={handleDelete}
         >
           Delete
         </button>
         <button
           className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
-          //   onClick={handleContribute}
+            onClick={handleContribute}
         >
           Contribute
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

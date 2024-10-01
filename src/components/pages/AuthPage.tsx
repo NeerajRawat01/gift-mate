@@ -1,18 +1,20 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import {
   AuthActionType,
   UserActionType,
 } from "../../store/actions/actions.constants";
 import { useNavigate } from "react-router-dom";
+import { getUserLoading } from "../../store/selectors/user.selector";
 
 const AuthPage = () => {
   // State to toggle between Sign In and Sign Up
   const [isSignUp, setIsSignUp] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isSubmitting = useSelector(getUserLoading);
 
   // Validation schema for Sign In
   const signInSchema = Yup.object().shape({
@@ -39,6 +41,7 @@ const AuthPage = () => {
 
   const afterLogin = () => {
     navigate("/");
+    window.location.reload();
   };
 
   return (
@@ -66,17 +69,15 @@ const AuthPage = () => {
                 type: UserActionType.CREATE_USER,
                 payload: values,
               });
-              console.log("Sign Up Form Values:", values);
             } else {
               dispatch({
                 type: AuthActionType.LOGIN_USER,
                 payload: { ...values, callback: afterLogin },
               });
-              console.log("Sign In Form Values:", values);
             }
           }}
         >
-          {({ isSubmitting }) => (
+          {() => (
             <Form className="space-y-4">
               {isSignUp && (
                 <div>
