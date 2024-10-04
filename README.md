@@ -38,7 +38,7 @@ The Money Gift Management Web Application facilitates the management of money gi
  A dynamic dashboard showcasing gift history, top guests, top hosts, and other key metrics.
 
 # Tech Stack
-- Frontend: Tailwind CSS for styling
+- Frontend: React with TypeScript, Tailwind CSS for styling, redux(state management), Formik & Yup (form handling)
 - Backend: Adonis.js (Node.js framework) , PostgreSQL (for data storage)
 
 - Other Tools:
