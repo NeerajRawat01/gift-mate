@@ -41,7 +41,7 @@ const Invitations: React.FC = () => {
       </p>
 
       {/* Event Cards */}
-      <div className="gap-10 p-2 max-h-[calc(100vh-10rem)] scrollbar overflow-auto grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+      <div className="gap-10 p-2 max-h-[calc(100vh-12rem)] scrollbar overflow-auto grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
         {loading ? (
           <Spinner />
         ) : (
@@ -64,7 +64,6 @@ const Invitations: React.FC = () => {
         </div>
       )}
 
-      {/* Invite Contributer Modal */}
       <CreateContributionModal
         event_id={eventId!}
         visible={showContributionModal}

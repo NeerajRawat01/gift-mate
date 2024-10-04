@@ -9,6 +9,9 @@ const Gifts = React.lazy(() => import("../components/pages/Gifts"));
 const InvitedEvents = React.lazy(
   () => import("../components/pages/Invitations")
 );
+const MyContributions = React.lazy(
+  () => import("../components/pages/MyContribution")
+);
 
 // Define your layout routes
 export const DashboardRoutes: Array<BaseRouteConfigType> = [
@@ -31,6 +34,11 @@ export const DashboardRoutes: Array<BaseRouteConfigType> = [
     key: "/gifts",
     name: "Gifts",
     element: Gifts,
+  },
+  {
+    key: "/my-contributions",
+    name: "My Contributions",
+    element: MyContributions,
   },
 ];
 

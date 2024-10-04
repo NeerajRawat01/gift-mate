@@ -20,7 +20,13 @@ export const eventSlice = createSlice({
   initialState,
   reducers: {
     addMayEvents: userAdapter.addMany,
-    eventAdd: userAdapter.addOne,
+    eventAdd: (state, action: PayloadAction<Event>) => {
+      const { id } = action.payload;
+      state.entities[id] = action.payload;
+      if (!state.ids.includes(id)) {
+        state.ids = [id, ...state.ids];
+      }
+    },
     eventDelete: userAdapter.removeOne,
     eventUpdate: userAdapter.updateOne,
     eventLoading: (state, action: PayloadAction<{ loading: boolean }>) => {

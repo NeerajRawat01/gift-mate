@@ -67,7 +67,7 @@ const EventCard: React.FC<Props> = ({
         <div className="mt-4 flex gap-4">
           <button
             onClick={() => navigate(`/event/${event.id}`)}
-            className={`flex-1 bg-indigo-600 text-white py-2 px-2 rounded-lg hover:bg-indigo-700 transition-colors duration-300`}
+            className={`flex-1 bg-blue-400 text-white py-2 px-2 rounded-lg hover:bg-blue-500 transition-colors duration-300`}
           >
             View Details
           </button>

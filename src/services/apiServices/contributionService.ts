@@ -21,13 +21,24 @@ class ContributionService {
     return response.data;
   }
 
-  public async fetchContributions() {
-    const response = await axios.get(`${apiUrl}/contribution/list`, {
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
-    });
-    return response.data;
+  public async fetchContributions(
+    type: "my_contributions" | "received_contributions"
+  ) {
+    if (type === "my_contributions") {
+      const response = await axios.get(`${apiUrl}/contribution/my`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      return response.data;
+    } else {
+      const response = await axios.get(`${apiUrl}/contribution/list`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      return response.data;
+    }
   }
 }
 

@@ -18,9 +18,23 @@ export const contributionSlice = createSlice({
   initialState,
   reducers: {
     addMayContributions: userAdapter.addMany,
-    contributionAdd: userAdapter.addOne,
+    // contributionAdd: userAdapter.addOne,
+    contributionAdd: (state, action: PayloadAction<any>) => {
+      const { id } = action.payload;
+      state.entities[id] = action.payload;
+      if (!state.ids.includes(id)) {
+        state.ids = [id, ...state.ids];
+      }
+    },
     contributionDelete: userAdapter.removeOne,
     contributionUpdate: userAdapter.updateOne,
+    resetContributions: (state) => {
+      state.entities = {};
+      state.ids = [];
+      state.loading = false;
+      state.error = "";
+      state.errors = [];
+    },
     contributionLoading: (
       state,
       action: PayloadAction<{ loading: boolean }>
@@ -43,6 +57,7 @@ export const {
   contributionLoading,
   contributionError,
   addMayContributions,
+  resetContributions,
 } = contributionSlice.actions;
 
 export default contributionSlice.reducer;

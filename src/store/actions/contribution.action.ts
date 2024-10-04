@@ -8,6 +8,9 @@ export const createContributionAction = (payload: {
   payload,
 });
 
-export const fetchContributionAction = () => ({
+export const fetchContributionAction = (
+  payload: "my_contributions" | "received_contributions"
+) => ({
   type: ContributionActionType.FETCH_CONTRIBUTION,
+  payload,
 });

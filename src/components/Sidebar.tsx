@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import ConfirmModal from "../modal/ConfirmModal";
 import { localStorageService } from "../services/localStorageServices";
 import { getUserData } from "../store/selectors/user.selector";
+import { BiSolidDonateHeart } from "react-icons/bi";
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false); // Start with the sidebar closed on mobile
@@ -36,6 +37,11 @@ const Sidebar: React.FC = () => {
       icon: <FcInvite className="text-2xl" />,
       path: "/invitations",
     },
+    {
+      name: "My Contributions",
+      icon: <BiSolidDonateHeart className="text-2xl" />,
+      path: "/my-contributions",
+    },
   ];
 
   const handleLogout = () => {
@@ -47,18 +53,20 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen fixed">
+    <div className={`flex h-screen fixed`}>
       <div
-        className={`bg-cyan-700 text-white w-64 transition-transform duration-300 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 md:block`}
+        className={`bg-cyan-700 text-white w-64 fixed h-full top-0 left-0 z-50 transition-all duration-300 ease-in-out ${
+          isOpen
+            ? "translate-x-0 opacity-100 pointer-events-auto"
+            : "-translate-x-full opacity-0 pointer-events-none"
+        } md:translate-x-0 md:opacity-100 md:pointer-events-auto`}
       >
         {/* Sidebar Header */}
         <div
           className={`flex items-center py-[2.1rem] justify-between p-2 border-b border-gray-500`}
         >
-          <h1 className="text-2xl font-extrabold text-center mx-8 tracking-wider drop-shadow-lg">
-            Gift <span className="text-pink-600">Mate</span>
+          <h1 className="text-2xl font-extrabold text-center mx-8 whitespace-nowrap drop-shadow-lg">
+            Gift <span className="text-pink-600 text-2xl"> Mate</span>
           </h1>
           <button
             onClick={toggleSidebar}
@@ -66,7 +74,7 @@ const Sidebar: React.FC = () => {
           >
             {isOpen && (
               <RiMenuUnfold4Fill
-                className="text-black md:hidden hover:bg-gray-200 z-20"
+                className="text-black md:hidden hover:bg-gray-200"
                 size={30}
               />
             )}
@@ -116,16 +124,14 @@ const Sidebar: React.FC = () => {
       </div>
 
       {/* Mobile Menu Bar */}
-      <div
-        className={`md:hidden flex items-center p-2 fixed top-0 w-full z-10`}
-      >
+      <div className={`md:hidden flex items-center p-2 fixed top-0 w-full `}>
         <button
           onClick={toggleSidebar}
           className="text-gray-300 hover:text-white"
         >
           {!isOpen && (
             <RiMenuUnfold3Fill
-              className="text-black hover:bg-gray-200 z-20"
+              className="text-black hover:bg-gray-200 "
               size={30}
             />
           )}
