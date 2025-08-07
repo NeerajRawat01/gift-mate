@@ -1,6 +1,9 @@
 
 # Money Gift Management Web Application
 The Money Gift Management Web Application facilitates the management of money gifts for events. Users can create events, invite guests, track gift contributions, and view their gift history through a user-friendly interface. The project leverages modern web technologies focusing on UI/UX design and seamless backend integration to offer an efficient, scalable solution.
+
+# Demo Video - https://www.youtube.com/watch?v=9RO096jd_DU&t=198s
+
 # Dashboard UI
 ![image](https://github.com/user-attachments/assets/1b8051e4-3d96-4554-8796-4f731c1e0e0e)
 # My Events Page
